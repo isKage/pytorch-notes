@@ -324,6 +324,124 @@ hook_handle.remove()
 
 ## 4 案例：线性回归
 
+```python
+import torch
+import numpy as np
+from matplotlib import pyplot as plt
+%matplotlib inline
+
+def get_fake_data(batch_size=16):
+    # 产生随机数据：y = 2 * x + 3，加上噪声
+    x = torch.rand(batch_size, 1) * 5  # 扩大一些，以免噪声太明显
+    y = x * 2 + 3 + torch.randn(batch_size, 1)
+    return x, y
+
+# 设置随机数种子，保证结果可复现
+torch.manual_seed(1000)
+
+x, y = get_fake_data()
+
+# plt.scatter(x.squeeze().numpy(), y.squeeze().numpy())
+# plt.show()
+
+# 初始化
+w = torch.rand(1, 1, requires_grad=True)  # w.shape = torch.Size([1, 1]) 因为 [8, 1] * [1, 1] -> [batch_size, 1] 和 y 维度相同
+b = torch.zeros(1, 1, requires_grad=True)
+
+losses = np.zeros(200)  # 存储损失值
+lr = 0.005  # 学习率
+EPOCHS = 200  # 迭代次数
+
+for epoch in range(EPOCHS):
+    x, y = get_fake_data(batch_size=32)
+
+    # 前向传播 计算损失
+    y_pred = x.mm(w) + b.expand_as(y)  # expand_as(y) 是广播机制，即将 b 复制成和 y 相同性质的张量 [1, 1] -> [batch_size, 1]
+    loss = 0.5 * (y_pred - y) ** 2  # MSE 均方误差，这是对张量 y 逐元素计算
+    loss = loss.sum()  # 累和成一个数
+    losses[epoch] = loss.item()
+
+    # 反向传播
+    loss.backward()
+
+    ''' 取 .data 是因为每一轮是根据随机生成的 batch_size 个点训练，但我们希望存储的是全局参数 w, b '''
+    ''' 故每次依据样本点更新全局参数，而不是改批次的参数 '''
+    # 更新参数
+    w.data.sub_(lr * w.grad.data)  # 或者 w.data = w.data - lr * w.grad.data
+    b.data.sub_(lr * b.grad.data)
+
+    # 梯度清零
+    w.grad.data.zero_()  # 不清零，梯度会不断累加
+    b.grad.data.zero_()
+
+    if epoch % 10 == 0:  # 每隔 10 次扔出当前训练情况
+        print("Epoch: {} / {}, Parameters: w is {}, b is {}, Loss: {}".format(epoch, EPOCHS, w.item(), b.item(), losses[epoch]))
+
+print("Epoch: {} / {}, Parameters: w is {}, b is {}, Loss: {}".format(EPOCHS, EPOCHS, w.item(), b.item(), losses[-1]))
+```
+
+![](https://blog-iskage.oss-cn-hangzhou.aliyuncs.com/images/QQ_1739010576001.png)
+
+- GPU 加速
+
+```python
+import torch
+import numpy as np
+from matplotlib import pyplot as plt
+
+# 检查是否有可用的 GPU
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
+
+def get_fake_data(batch_size=16):
+    # 产生随机数据：y = 2 * x + 3，加上噪声
+    x = torch.rand(batch_size, 1, device=device) * 5  # 将数据移动到 GPU
+    y = x * 2 + 3 + torch.randn(batch_size, 1, device=device)  # 将数据移动到 GPU
+    return x, y
+
+# 设置随机数种子，保证结果可复现
+torch.manual_seed(1000)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed(1000)  # 为 CUDA 设置随机种子
+
+# 初始化参数，并将参数移动到 GPU
+w = torch.rand(1, 1, requires_grad=True, device=device)  # 将 w 移动到 GPU
+b = torch.zeros(1, 1, requires_grad=True, device=device)  # 将 b 移动到 GPU
+
+losses = np.zeros(200)  # 存储损失值
+lr = 0.005  # 学习率
+EPOCHS = 200  # 迭代次数
+
+for epoch in range(EPOCHS):
+    x, y = get_fake_data(batch_size=32)
+
+    # 前向传播 计算损失
+    y_pred = x.mm(w) + b.expand_as(y)  # expand_as(y) 是广播机制，即将 b 复制成和 y 相同性质的张量 [1, 1] -> [batch_size, 1]
+    loss = 0.5 * (y_pred - y) ** 2  # MSE 均方误差，这是对张量 y 逐元素计算
+    loss = loss.sum()  # 累和成一个数
+    losses[epoch] = loss.item()
+
+    # 反向传播
+    loss.backward()
+
+    # 更新参数
+    w.data.sub_(lr * w.grad.data)  # 或者 w.data = w.data - lr * w.grad.data
+    b.data.sub_(lr * b.grad.data)
+
+    # 梯度清零
+    w.grad.data.zero_()  # 不清零，梯度会不断累加
+    b.grad.data.zero_()
+
+    if epoch % 10 == 0:  # 每隔 10 次打印当前训练情况
+        print("Epoch: {} / {}, Parameters: w is {}, b is {}, Loss: {}".format(epoch, EPOCHS, w.item(), b.item(), losses[epoch]))
+
+print("Epoch: {} / {}, Parameters: w is {}, b is {}, Loss: {}".format(EPOCHS, EPOCHS, w.item(), b.item(), losses[-1]))
+```
+
+
+
+
+
 
 
 
