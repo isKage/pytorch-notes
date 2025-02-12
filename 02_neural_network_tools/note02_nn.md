@@ -1,4 +1,4 @@
-# Pytorch搭建神经网络（3）利用 `nn` 便捷搭建神经网络
+# Pytorch 搭建神经网络（3）利用 `nn` 便捷搭建神经网络
 
 基于[《深度学习框架 Pytorch 入门与实践》陈云](https://book.douban.com/subject/27624483/) 
 

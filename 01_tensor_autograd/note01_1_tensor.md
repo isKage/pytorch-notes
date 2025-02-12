@@ -1,4 +1,4 @@
-# Pytorch搭建神经网络（1）Tensor 张量数据结构
+# Pytorch 搭建神经网络（1）Tensor 张量数据结构
 
 基于[《深度学习框架 Pytorch 入门与实践》陈云](https://book.douban.com/subject/27624483/) 
 

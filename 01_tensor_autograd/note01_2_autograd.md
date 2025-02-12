@@ -1,4 +1,4 @@
-# Pytorch搭建神经网络（2）自动求导autograd、反向传播backward与计算图
+# Pytorch 搭建神经网络（2）自动求导autograd、反向传播backward与计算图
 
 基于[《深度学习框架 Pytorch 入门与实践》陈云](https://book.douban.com/subject/27624483/) 
 
