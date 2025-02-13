@@ -5,3 +5,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# note04
+04_tensorboard_and_gpu/logs
+04_tensorboard_and_gpu/data/MNIST/raw/*
+# 占位
+!04_tensorboard_and_gpu/data/MNIST/raw/readme.txt
