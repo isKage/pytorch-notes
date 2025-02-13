@@ -36,7 +36,9 @@ git clone https://github.com/isKage/pytorch-notes.git
     1. [Pytorch 的 nn 模块](./02_neural_network_tools/note02_nn.md)
 3. [数据处理](./03_data_processing)
     1. [数据处理之 Dataset 和 Dataloader](./03_data_processing/note03_dataprocessing.md)
-4. 待更新 ...
+4. [可视化与 GPU 加速](./04_tensorboard_and_gpu)
+    1. [Tensorboard 可视化工具](./04_tensorboard_and_gpu/note04_1_tensorboard.md)
+    2. [GPU 加速: CUDA](./04_tensorboard_and_gpu/note04_2_cuda.md) 
 
 ## 3 友链
 
