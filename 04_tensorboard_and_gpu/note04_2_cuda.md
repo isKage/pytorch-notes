@@ -117,19 +117,25 @@ if torch.cuda.is_available():
 
 ```python
 # 指定默认使用GPU "cuda:0"
-with torch.cuda.device(0):    
+with torch.cuda.device(0):
     # 在 GPU 上构建Tensor
     a = torch.cuda.FloatTensor(2, 3)
 
     # 将 Tensor 转移至 GPU
     b = torch.FloatTensor(2, 3).cuda()
-    
-    print(a.get_divice)
-    print(b.get_divice)
+
+    print(a.get_device)
+    print(b.get_device)
 
     c = a + b
-    print(c.get_divice)
+    print(c.get_device)
 ```
+```python
+<built-in method get_device of Tensor object at 0x0000019C70C59CC0>
+<built-in method get_device of Tensor object at 0x0000019C04443930>
+<built-in method get_device of Tensor object at 0x0000019C04441360>
+```
+
 
 或者使用 `torch.set_default_tensor_type()` 方法，指定张量类型
 
