@@ -95,7 +95,7 @@ if torch.cuda.is_available():
 
     # 张量 Tensor 迁移到 GPU
     inputs = torch.randn(4, 2).cuda()
-    target = t.Tensor([1, 0, 0, 1]).long().cuda()
+    target = torch.Tensor([1, 0, 0, 1]).long().cuda()
 
     # loss = criterion(input, target)  # 报错：计算损失函数的参数为迁移到 GPU
     
