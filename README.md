@@ -38,7 +38,10 @@ git clone https://github.com/isKage/pytorch-notes.git
     1. [数据处理之 Dataset 和 Dataloader](./03_data_processing/note03_dataprocessing.md)
 4. [可视化与 GPU 加速](./04_tensorboard_and_gpu)
     1. [Tensorboard 可视化工具](./04_tensorboard_and_gpu/note04_1_tensorboard.md)
-    2. [GPU 加速: CUDA](./04_tensorboard_and_gpu/note04_2_cuda.md) 
+    2. [GPU 加速: CUDA](./04_tensorboard_and_gpu/note04_2_cuda.md)
+5. [向量化与索引](./05_vectorization_index)
+    1. [向量化 广播机制 基本索引](./05_vectorization_index/note05_1_vectorization.md)
+
 
 ## 3 友链
 
