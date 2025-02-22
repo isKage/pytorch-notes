@@ -1,6 +1,7 @@
 # pycharm
 .idea/
 .DS_Store
+*/.DS_Store
 
 __pycache__/
 *.py[cod]
@@ -11,3 +12,7 @@ __pycache__/
 04_tensorboard_and_gpu/data/MNIST/raw/*
 # 占位
 !04_tensorboard_and_gpu/data/MNIST/raw/readme.txt
+
+# note06
+06_dog_vs_cat_classification/AllData/*
+!06_dog_vs_cat_classification/AllData/readme.md
