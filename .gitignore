@@ -4,6 +4,7 @@
 */.DS_Store
 
 __pycache__/
+*/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -16,3 +17,5 @@ __pycache__/
 # note06
 06_dog_vs_cat_classification/AllData/*
 !06_dog_vs_cat_classification/AllData/readme.md
+06_dog_vs_cat_classification/checkpoints/*.pth
+06_dog_vs_cat_classification/config.py
