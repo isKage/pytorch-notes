@@ -19,3 +19,6 @@ __pycache__/
 !06_dog_vs_cat_classification/AllData/readme.md
 06_dog_vs_cat_classification/checkpoints/*.pth
 06_dog_vs_cat_classification/config.py
+06_dog_vs_cat_classification/logs/*
+!06_dog_vs_cat_classification/logs/readme.txt
+06_dog_vs_cat_classification/result.csv

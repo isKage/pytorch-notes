@@ -1,1 +1,1 @@
-from .basic import BasicModule
+from .cnn import AlexNetClassification

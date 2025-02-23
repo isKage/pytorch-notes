@@ -27,6 +27,6 @@ class BasicModule(nn.Module):
         如 ResNet34_20250710_23:57:29.pth
         """
         if filename is None:
-            filename = 'checkpoints/' + self.model_name + '_' + time.strftime("%Y-%m-%d_%H:%M:%S") + '.pth'
+            filename = 'checkpoints/' + self.model_name + '_' + time.strftime("%Y-%m-%d:%H:%M:%S") + '.pth'
         torch.save(self.state_dict(), filename)
         return filename
